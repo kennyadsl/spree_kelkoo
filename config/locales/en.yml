@@ -1,0 +1,8 @@
+---
+en:
+  edit_kelkoo_settings: "Edit Kelkoo settings"
+  kelkoo_title: "Kelkoo title"
+  kelkoo_description: "Kelkoo description"
+  production_domain: "Production domain"
+  kelkoo: "Kelkoo"
+  kelkoos_description: "Provides a live feed of active products for Kelkoo" #Not to be confused with the above
