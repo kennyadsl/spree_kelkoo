@@ -1,10 +1,10 @@
 <% production_domain = Spree::Kelkoo::Config[:production_domain] %>
 <% @products.each do |product| %>
   <%
+    fields = []
+    cats = []
     if product.taxons.any? 
-      fields = []
-      cats = []
-      product.taxons.each do |taxon|
+            product.taxons.each do |taxon|
         if taxon.parent && taxon.parent.name == "Marche"
           fields << taxon.name
         else
