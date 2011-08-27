@@ -1,0 +1,24 @@
+<% production_domain = Spree::Kelkoo::Config[:production_domain] %>
+<% @products.each do |product| %>
+  <%
+    if product.taxons.any? 
+      fields = []
+      cats = []
+      product.taxons.each do |taxon|
+        if taxon.parent && taxon.parent.name == "Marche"
+          fields << taxon.name
+        else
+          if cats.empty?
+            while taxon.parent != nil
+              cats << taxon.name
+              taxon = taxon.parent
+            end
+          end
+        end
+      end 
+      fields << cats.reverse.join(",")
+    end 
+  %>
+  <%= "#{fields.join("|")}|#{product.name.capitalize}|#{product.sku.to_s}|#{product_price(product, {:format_as_currency => false})}|#{"6.00"}|#{"disponibile"}|#{production_domain + 'products/' + product.permalink}|#{production_domain.sub(/\/$/, '') + product.images.first.attachment.url(:product) unless product.images.empty?}|#{CGI.escapeHTML(product.description.gsub(%r{</?[^>]+?>}, '')).truncate(250) if product.description}<endrecord>" %> 
+<% end %>
+
