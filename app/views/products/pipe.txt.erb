@@ -3,10 +3,11 @@
   <%
     fields = []
     cats = []
+    brand = ""
     if product.taxons.any? 
             product.taxons.each do |taxon|
         if taxon.parent && taxon.parent.name == "Marche"
-          fields << taxon.name
+          brand = taxon.name
         else
           if cats.empty?
             while taxon.parent != nil
@@ -16,9 +17,10 @@
           end
         end
       end 
+      fields << brand.blank? ? "Nessuna marca" : brand
       fields << cats.reverse.join(",") if !cats.empty?
     end 
   %>
-  <%= "#{!fields.empty? ? fields.join("|") : "Non categorizzato"}|#{product.name.capitalize}|#{product.sku.to_s}|#{product_price(product, {:format_as_currency => false})}|#{"6.00"}|#{"disponibile"}|#{production_domain + 'products/' + product.permalink}|#{production_domain.sub(/\/$/, '') + product.images.first.attachment.url(:product) unless product.images.empty?}|#{CGI.escapeHTML(product.description.gsub(%r{</?[^>]+?>}, '')).truncate(250) if product.description}<endrecord>" %> 
+  <%= "#{!fields.empty? ? fields.join("|") : "Non categorizzato"}|#{product.name.capitalize}|#{product.sku.to_s}|#{product_price(product, {:format_as_currency => false})}|#{"6.00"}|#{"disponibile"}|#{production_domain + 'products/' + product.permalink}|#{production_domain.sub(/\/$/, '') + product.images.first.attachment.url(:product) unless product.images.empty?}|#{CGI.escapeHTML(product.description.gsub(%r{</?[^>]+?>}, '')).truncate(250) if product.description}" %><endrecord>
 <% end %>
 
