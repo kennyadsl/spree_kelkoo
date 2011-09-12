@@ -7,7 +7,7 @@ To access the feed visit:
 
     http://yoursite.com/products/kelkoo.rss
     
-Also provides feeds for other (italian) websites that support field "|" char separated:
+Also provides feeds for other (italian) websites that support fields "|" separated:
 
 - Ciao.it
 - BestShopping.it
