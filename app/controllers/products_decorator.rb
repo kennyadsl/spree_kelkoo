@@ -5,5 +5,6 @@ ProductsController.class_eval do
   
   def pipe
     @products = Product.active
+    render :layout => false 
   end
 end
