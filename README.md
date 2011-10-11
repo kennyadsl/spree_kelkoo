@@ -6,6 +6,20 @@ Provides a live product feed for Kelkoo rather a file that you have to upload. T
 To access the feed visit:
 
     http://yoursite.com/products/kelkoo.rss
+    
+Also provides feeds for other (italian) websites that support fields "|" separated:
+
+- Ciao.it
+- BestShopping.it
+- Twenga.it
+- ilpiubasso.it
+- network TrovaPrezzi
+- suqui.it
+
+To access txt feed visit:
+
+    http://yoursite.com/products/pipe.txt
+    
 
 Installation
 ------------
