@@ -19,5 +19,5 @@
       end
     end
   %>
-  <%= "#{brand.blank? ? "" : brand}|#{!cats.empty? ? cats.reverse.join(",") : ""}|#{product.name.capitalize}|#{product.sku.to_s}|#{product_price(product, {:format_as_currency => false})}|#{"6.00"}|#{"disponibile"}|#{production_domain + 'products/' + product.permalink}|#{production_domain.sub(/\/$/, '') + product.images.first.attachment.url(:product) unless product.images.empty?}|#{CGI.escapeHTML(product.description.gsub(%r{</?[^>]+?>}, '')).strip.gsub(/\r/,"").gsub(/\n/,"").truncate(250).html_safe if product.description}" %><endrecord>
+  <%= "#{brand.blank? ? "" : brand}|#{!cats.empty? ? cats.reverse.join(",") : ""}|#{product.name.capitalize}|#{product.sku.to_s}|#{product_price(product, {:format_as_currency => false})}|#{"6.00"}|#{"disponibile"}|#{production_domain + 'products/' + product.permalink}|#{production_domain.sub(/\/$/, '') + URI.escape(product.images.first.attachment.url(:product)) unless product.images.empty?}|#{CGI.escapeHTML(product.description.gsub(%r{</?[^>]+?>}, '')).strip.gsub(/\r/,"").gsub(/\n/,"").truncate(250).html_safe if product.description}" %><endrecord>
 <% end %>
