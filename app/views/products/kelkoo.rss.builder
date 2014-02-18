@@ -3,13 +3,13 @@ xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8"
   xml.products do
     #xml.title Spree::Kelkoo::Config[:kelkoo_title]
     #xml.description Spree::Kelkoo::Config[:kelkoo_description]
-    
+
     production_domain = Spree::Kelkoo::Config[:production_domain]
     #xml.link production_domain
-    
+
     @products.each do |product|
       xml.product do
-        if product.taxons.any? 
+        if product.taxons.any?
           cats = []
           product.taxons.each do |taxon|
             if taxon.parent && taxon.parent.name == "Marche"
@@ -22,13 +22,13 @@ xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8"
                 end
               end
             end
-          end 
+          end
           xml.Category cats.reverse.join("#")
-         end 
+         end
         xml.ProductName product.name.capitalize
         xml.EANcode product.sku.to_s
         xml.Price product_price(product, {:format_as_currency => false})
-        xml.DeliveryCost "6.00"
+        xml.DeliveryCost shipping_costs(product)
         xml.Deliverytime "1-2 giorni"
         xml.Availability "Disponibile"
         xml.ProductUrl production_domain + 'products/' + product.permalink
