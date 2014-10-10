@@ -10,7 +10,7 @@
             brand = taxon.name
             taxon = taxon.parent
           end
-        elsif taxon.taxonomy.name == 'Categorie' && cats.empty?
+        elsif (taxon.taxonomy.name == 'Categorie' || taxon.taxonomy.name == 'Profumeria') && cats.empty?
           while taxon.parent != nil
             cats << taxon.name
             taxon = taxon.parent
