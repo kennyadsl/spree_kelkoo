@@ -1,19 +1,19 @@
 <% production_domain = Spree::Kelkoo::Config[:production_domain] %>
 <% @products.each do |product| %>
   <%
-    fields = []
     cats = []
     brand = ""
     if product.taxons.any?
       product.taxons.each do |taxon|
-        if taxon.parent && taxon.parent.name == "Marche"
-          brand = taxon.name
-        else
-          if cats.empty?
-            while taxon.parent != nil
-              cats << taxon.name
-              taxon = taxon.parent
-            end
+        if taxon.taxonomy.name == 'Marche' && brand.empty?
+          while taxon.parent != nil
+            brand = taxon.name
+            taxon = taxon.parent
+          end
+        elsif taxon.taxonomy.name == 'Categorie' && cats.empty?
+          while taxon.parent != nil
+            cats << taxon.name
+            taxon = taxon.parent
           end
         end
       end
